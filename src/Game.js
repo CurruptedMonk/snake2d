@@ -1,18 +1,21 @@
 import Layer from "./Layer.js";
 import Snake from "./Snake.js";
 import DIRECTIONS from "./DIRECTIONS.js";
+import Food from "./Food.js";
 
 export default class {
     #blockSize;
     #backgroundLayer;
     #gameLayer;
     #snake;
+    #food;
 
     constructor(container) {
         this.#blockSize = 20;
         this.#backgroundLayer = new Layer(container, this.#blockSize*30, this.#blockSize*30, "gray");
         this.#gameLayer = new Layer(container, this.#blockSize*30, this.#blockSize*30, "transparent");
         this.#snake = new Snake(this.#gameLayer, this.#blockSize);
+        this.#food = new Food(this.#gameLayer, this.#blockSize);
 
         document.addEventListener("keydown", event => {
             const key = event.key;
@@ -31,6 +34,7 @@ export default class {
     draw() {
         this.#gameLayer.clear();
         this.#snake.draw();
+        this.#food.draw();
     }
 
     update() {
