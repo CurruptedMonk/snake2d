@@ -1,5 +1,6 @@
 import Layer from "./Layer.js";
 import Snake from "./Snake.js";
+import DIRECTIONS from "./DIRECTIONS.js";
 
 export default class {
     #blockSize;
@@ -12,6 +13,19 @@ export default class {
         this.#backgroundLayer = new Layer(container, this.#blockSize*30, this.#blockSize*30, "gray");
         this.#gameLayer = new Layer(container, this.#blockSize*30, this.#blockSize*30, "transparent");
         this.#snake = new Snake(this.#gameLayer, this.#blockSize);
+
+        document.addEventListener("keydown", event => {
+            const key = event.key;
+            if(key === "ArrowUp") {
+                this.#snake.changeDirection(DIRECTIONS.UP);
+            } else if(key === "ArrowLeft") {
+                this.#snake.changeDirection(DIRECTIONS.LEFT);
+            }else if(key === "ArrowDown") {
+                this.#snake.changeDirection(DIRECTIONS.DOWN);
+            }else if(key === "ArrowRight") {
+                this.#snake.changeDirection(DIRECTIONS.RIGHT);
+            }
+        })
     }
 
     draw() {
