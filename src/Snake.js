@@ -1,19 +1,21 @@
 import Direction from "./Direction.js";
 import Block from "./Block.js";
+import Position from "./Position.js";
 
 export default class {
     #layer;
     #blockSize;
-    #x;
-    #y;
     #direction;
     #body;
+    #position;
 
     constructor(layer, blockSize) {
         this.#layer = layer;
         this.#blockSize = blockSize;
-        this.#x = this.#layer.getWidth() /2;
-        this.#y = this.#layer.getHeight() / 2;
+        this.#position = new Position(
+            this.#layer.getWidth() /2,
+            this.#layer.getHeight() / 2
+        )
         this.#direction = new Direction(blockSize);
         this.#body = [this.#createHead()];
     }
@@ -27,8 +29,8 @@ export default class {
     }
 
     draw() {
-        for(const position of this.#body) {
-            position.draw(this.#layer.getContext(), "black");
+        for(const piece of this.#body) {
+            piece.draw(this.#layer.getContext(), "black");
         }
     }
 
@@ -37,12 +39,17 @@ export default class {
     }
 
     #updateHeadCoordinates() {
-        this.#x += this.#direction.x;
-        this.#y += this.#direction.y;
+        const newX = this.#position.x + this.#direction.position.x;
+        const newY = this.#position.y + this.#direction.position.y;
+
+        this.#position = new Position(
+            newX,
+            newY
+        )
     }
 
     #createHead() {
-        return Block.create(this.#x, this.#y, this.#blockSize);
+        return Block.create(this.#position, this.#blockSize);
     }
 }
 

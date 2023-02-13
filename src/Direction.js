@@ -1,55 +1,47 @@
 import DIRECTIONS from "./DIRECTIONS.js";
+import Position from "./Position.js";
 
 export default class {
     #step;
-    #x;
-    #y;
-    /* #nextX and #nextY used to fixes a bug,
+    #position;
+    /* #nextPosition used to fixes a bug,
     * where a quick change of direction could cause the snake to scatter in the opposite direction
     */
-    #nextX;
-    #nextY;
+    #nextPosition;
 
     constructor(step) {
         this.#step = step;
-        this.#x = this.#step;
-        this.#y = 0
-        this.#nextX = this.#x;
-        this.#nextY = this.#y;
+        this.#position = new Position(this.#step, 0);
+        this.#nextPosition = new Position(this.#position.x, this.#position.y)
     }
 
     set(direction) {
-        if (direction === DIRECTIONS.UP && this.#y !== this.#step) {
-            this.#nextX = 0;
-            this.#nextY = -this.#step;
+        if (direction === DIRECTIONS.UP && this.#position.y !== this.#step) {
+            this.#nextPosition = new Position(0, -this.#step);
             return;
         }
-        if (direction === DIRECTIONS.LEFT && this.#x !== this.#step) {
-            this.#nextX = -this.#step;
-            this.#nextY = 0;
+        if (direction === DIRECTIONS.LEFT && this.#position.x !== this.#step) {
+            this.#nextPosition = new Position(-this.#step, 0);
             return;
         }
-        if (direction === DIRECTIONS.DOWN && this.#y !== -this.#step) {
-            this.#nextX = 0;
-            this.#nextY = this.#step;
+        if (direction === DIRECTIONS.DOWN && this.#position.y !== -this.#step) {
+            this.#nextPosition = new Position(0, this.#step);
             return;
         }
-        if (direction === DIRECTIONS.RIGHT && this.#x !== -this.#step) {
-            this.#nextX = this.#step;
-            this.#nextY = 0;
+        if (direction === DIRECTIONS.RIGHT && this.#position.x !== -this.#step) {
+            this.#nextPosition = new Position(this.#step, 0);
         }
     }
 
     update() {
-        this.#x = this.#nextX;
-        this.#y = this.#nextY;
+        this.#position = new Position(
+            this.#nextPosition.x,
+            this.#nextPosition.y
+        );
     }
 
-    get x() {
-        return this.#x;
+    get position() {
+        return this.#position;
     }
 
-    get y() {
-        return this.#y;
-    }
 }

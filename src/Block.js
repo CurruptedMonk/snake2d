@@ -1,33 +1,31 @@
 export default class Block{
-    #x;
-    #y;
+    #position;
     #size;
 
-    constructor(x, y, size) {
-        this.#x = x;
-        this.#y = y;
+    constructor(position, size) {
+        this.#position = position;
         this.#size = size;
     }
 
-    static create(x, y, size) {
-        return new Block(x, y, size);
+    static create(position, size) {
+        return new Block(position, size);
     }
 
     draw(context, color) {
         context.fillStyle = color;
-        context.fillRect(this.#x, this.#y, this.#size, this.#size)
+        context.fillRect(
+            this.#position.x,
+            this.#position.y,
+            this.#size,
+            this.#size
+        )
     }
 
-    isEqual(otherBlock) {
-        return this.#x === otherBlock.x
-            && this.#y === otherBlock.y;
+    checkPositionMatches(otherPosition) {
+        return this.#position.isEqual(otherPosition);
     }
 
-    get x() {
-        return this.#x;
-    }
-
-    get y() {
-        return this.#y;
+    get position() {
+        return this.#position;
     }
 }

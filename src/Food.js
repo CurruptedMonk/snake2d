@@ -1,22 +1,24 @@
 import Block from "./Block.js";
+import Position from "./Position.js";
 
 export default class {
     #layer;
     #blockSize;
-    #x;
-    #y;
+    #body;
     #position;
 
     constructor(layer, blockSize) {
         this.#layer = layer;
         this.#blockSize = blockSize;
-        this.#x = (this.#layer.getWidth() /2) + (this.#blockSize * 4);
-        this.#y = this.#layer.getHeight() / 2;
-        this.#position = Block.create(this.#x, this.#y, this.#blockSize);
+        this.#position = new Position(
+            (this.#layer.getWidth() /2) + (this.#blockSize * 4),
+            this.#layer.getHeight() / 2
+        )
+        this.#body = Block.create(this.#position, this.#blockSize);
     }
 
     draw() {
-        this.#position.draw(this.#layer.getContext(), "green");
+        this.#body.draw(this.#layer.getContext(), "green");
     }
 
 }
