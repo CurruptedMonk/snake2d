@@ -1,49 +1,55 @@
 import Layer from "./Layer.js";
-import Snake from "./Snake.js";
+import Snake from "./actors/Snake.js";
 import DIRECTIONS from "./DIRECTIONS.js";
-import Food from "./Food.js";
+import Food from "./actors/Food.js";
 
 export default class {
     #blockSize;
     #backgroundLayer;
     #gameLayer;
-    #snake;
-    #food;
+    #actors;
 
     constructor(container) {
         this.#blockSize = 20;
         this.#backgroundLayer = new Layer(container, this.#blockSize*30, this.#blockSize*30, "gray");
         this.#gameLayer = new Layer(container, this.#blockSize*30, this.#blockSize*30, "transparent");
-        this.#snake = new Snake(this.#gameLayer, this.#blockSize);
-        this.#food = new Food(this.#gameLayer, this.#blockSize);
+        this.#actors = Object.freeze({
+                snake: new Snake(this.#gameLayer, this.#blockSize),
+                food: new Food(this.#gameLayer, this.#blockSize)
+            }
+        )
 
         document.addEventListener("keydown", event => {
             const key = event.key;
             if(key === "ArrowUp") {
-                this.#snake.changeDirection(DIRECTIONS.UP);
+                this.#actors.snake.changeDirection(DIRECTIONS.UP);
             } else if(key === "ArrowLeft") {
-                this.#snake.changeDirection(DIRECTIONS.LEFT);
+                this.#actors.snake.changeDirection(DIRECTIONS.LEFT);
             }else if(key === "ArrowDown") {
-                this.#snake.changeDirection(DIRECTIONS.DOWN);
+                this.#actors.snake.changeDirection(DIRECTIONS.DOWN);
             }else if(key === "ArrowRight") {
-                this.#snake.changeDirection(DIRECTIONS.RIGHT);
+                this.#actors.snake.changeDirection(DIRECTIONS.RIGHT);
             }
         })
     }
 
     draw() {
         this.#gameLayer.clear();
-        this.#snake.draw();
-        this.#food.draw();
+        for (const actor of Object.values(this.#actors)) {
+            actor.draw()
+        }
     }
 
     update() {
-        this.#snake.update();
-        if (this.#snake.isEat(this.#food.position)) {
-            this.#food.changePosition(this.#snake.body);
-            this.#snake.growUp();
+        for (const actor of Object.values(this.#actors)) {
+            actor.update();
         }
-        if(this.#snake.isDeathCollision()) {
+
+        if (this.#actors.snake.isEat(this.#actors.food.position)) {
+            this.#actors.food.changePosition(this.#actors.snake.body);
+            this.#actors.snake.growUp();
+        }
+        if(this.#actors.snake.isDeathCollision()) {
             console.log("death")
         }
     }

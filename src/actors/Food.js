@@ -1,5 +1,5 @@
-import Block from "./Block.js";
-import Position from "./Position.js";
+import Block from "../Block.js";
+import Position from "../Position.js";
 
 export default class {
     #layer;
@@ -19,6 +19,10 @@ export default class {
 
     draw() {
         this.#body.draw(this.#layer.context, "green");
+    }
+
+    update() {
+
     }
 
     get position() {

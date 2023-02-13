@@ -1,6 +1,6 @@
-import Direction from "./Direction.js";
-import Block from "./Block.js";
-import Position from "./Position.js";
+import Direction from "../Direction.js";
+import Block from "../Block.js";
+import Position from "../Position.js";
 
 export default class {
     #layer;
