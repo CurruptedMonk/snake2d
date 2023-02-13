@@ -38,6 +38,14 @@ export default class {
        this.#direction.set(direction);
     }
 
+    isEat(foodPosition) {
+        return this.#position.isEqual(foodPosition);
+    }
+
+    get body() {
+        return this.#body;
+    }
+
     #updateHeadCoordinates() {
         const newX = this.#position.x + this.#direction.position.x;
         const newY = this.#position.y + this.#direction.position.y;

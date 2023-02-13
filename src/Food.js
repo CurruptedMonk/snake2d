@@ -21,4 +21,27 @@ export default class {
         this.#body.draw(this.#layer.getContext(), "green");
     }
 
+    get position() {
+        return this.#position;
+    }
+
+    changePosition(snakeBody) {
+        let newPosition;
+        do {
+            const newX= this.#randomPosition(this.#layer.getWidth(), this.#blockSize);
+            const newY = this.#randomPosition(this.#layer.getHeight(), this.#blockSize);
+            newPosition = new Position(newX, newY);
+        } while (this.#isBlockPositionOccupied(snakeBody, newPosition));
+
+        this.#position = newPosition;
+        this.#body = Block.create(this.#position, this.#blockSize);
+    }
+
+    #randomPosition(axisLength, blockSize) {
+        return Math.floor(Math.random() * (axisLength / blockSize)) * blockSize;
+    }
+
+    #isBlockPositionOccupied(blocks, position) {
+        return blocks.some(piece => piece.checkPositionMatches(position));
+    }
 }
