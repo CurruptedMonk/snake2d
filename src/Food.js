@@ -11,14 +11,14 @@ export default class {
         this.#layer = layer;
         this.#blockSize = blockSize;
         this.#position = new Position(
-            (this.#layer.getWidth() /2) + (this.#blockSize * 4),
-            this.#layer.getHeight() / 2
+            (this.#layer.width /2) + (this.#blockSize * 4),
+            this.#layer.width / 2
         )
         this.#body = Block.create(this.#position, this.#blockSize);
     }
 
     draw() {
-        this.#body.draw(this.#layer.getContext(), "green");
+        this.#body.draw(this.#layer.context, "green");
     }
 
     get position() {
@@ -28,8 +28,8 @@ export default class {
     changePosition(snakeBody) {
         let newPosition;
         do {
-            const newX= this.#randomPosition(this.#layer.getWidth(), this.#blockSize);
-            const newY = this.#randomPosition(this.#layer.getHeight(), this.#blockSize);
+            const newX= this.#randomPosition(this.#layer.width, this.#blockSize);
+            const newY = this.#randomPosition(this.#layer.height, this.#blockSize);
             newPosition = new Position(newX, newY);
         } while (this.#isBlockPositionOccupied(snakeBody, newPosition));
 

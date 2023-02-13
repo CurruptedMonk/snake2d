@@ -13,8 +13,8 @@ export default class {
         this.#layer = layer;
         this.#blockSize = blockSize;
         this.#position = new Position(
-            this.#layer.getWidth() /2,
-            this.#layer.getHeight() / 2
+            this.#layer.width /2,
+            this.#layer.width / 2
         )
         this.#direction = new Direction(blockSize);
         this.#body = [this.#createHead()];
@@ -30,7 +30,7 @@ export default class {
 
     draw() {
         for(const piece of this.#body) {
-            piece.draw(this.#layer.getContext(), "black");
+            piece.draw(this.#layer.context, "black");
         }
     }
 

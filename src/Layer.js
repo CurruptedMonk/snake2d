@@ -17,15 +17,15 @@ export default class {
         this.#context.clearRect(0, 0, this.#canvas.width, this.#canvas.height);
     }
 
-    getWidth() {
+    get width() {
         return this.#canvas.width;
     }
 
-    getHeight() {
+    get height() {
         return this.#canvas.height;
     }
 
-    getContext() {
+    get context() {
         return this.#context;
     }
 }
