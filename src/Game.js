@@ -43,5 +43,8 @@ export default class {
             this.#food.changePosition(this.#snake.body);
             this.#snake.growUp();
         }
+        if(this.#snake.isDeathCollision()) {
+            console.log("death")
+        }
     }
 }

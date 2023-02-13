@@ -48,6 +48,18 @@ export default class {
         this.#body.push(this.#cuttedTail);
     }
 
+    isDeathCollision() {
+        const head = this.#body[0];
+        const headlessBody = this.#body.slice(1);
+        const selfCollision = headlessBody.some(block => block.checkPositionMatches(head.position));
+        const wallCollision = head.position.x < 0
+            || head.position.y < 0
+            || head.position.x > this.#layer.width
+            || head.position.y > this.#layer.height;
+
+        return selfCollision || wallCollision;
+    }
+
     get body() {
         return this.#body;
     }
