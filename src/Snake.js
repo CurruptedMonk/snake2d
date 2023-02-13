@@ -8,6 +8,7 @@ export default class {
     #direction;
     #body;
     #position;
+    #cuttedTail
 
     constructor(layer, blockSize) {
         this.#layer = layer;
@@ -18,6 +19,7 @@ export default class {
         )
         this.#direction = new Direction(blockSize);
         this.#body = [this.#createHead()];
+
     }
 
     update() {
@@ -25,7 +27,7 @@ export default class {
         this.#updateHeadCoordinates();
 
         this.#body.unshift(this.#createHead());
-        this.#body.pop();
+        this.#cuttedTail = this.#body.pop();
     }
 
     draw() {
@@ -40,6 +42,10 @@ export default class {
 
     isEat(foodPosition) {
         return this.#position.isEqual(foodPosition);
+    }
+
+    growUp() {
+        this.#body.push(this.#cuttedTail);
     }
 
     get body() {

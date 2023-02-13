@@ -41,6 +41,7 @@ export default class {
         this.#snake.update();
         if (this.#snake.isEat(this.#food.position)) {
             this.#food.changePosition(this.#snake.body);
+            this.#snake.growUp();
         }
     }
 }
