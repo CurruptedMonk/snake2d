@@ -18,7 +18,6 @@ export default class{
             this.#skippedFramesLimit -= 0.25;
             this.#current += 0.25;
         }
-        console.log(this.#skippedFramesLimit);
     }
 
     get skippedFramesLimit() {
