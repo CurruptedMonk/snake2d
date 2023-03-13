@@ -63,8 +63,8 @@ export default class {
     #isWallCollision(head) {
         return head.position.x < 0
             || head.position.y < 0
-            || head.position.x > this.#layer.width
-            || head.position.y > this.#layer.height;
+            || head.position.x > this.#layer.width - this.#blockSize
+            || head.position.y > this.#layer.height - this.#blockSize;
     }
 
     get body() {
