@@ -35,7 +35,7 @@ export default class {
             const newX= this.#randomPosition(this.#layer.width, this.#blockSize);
             const newY = this.#randomPosition(this.#layer.height, this.#blockSize);
             newPosition = new Position(newX, newY);
-        } while (this.#isBlockPositionOccupied(snakeBody, newPosition));
+        } while (Block.isOccupied(snakeBody, newPosition));
 
         this.#position = newPosition;
         this.#body = Block.create(this.#position, this.#blockSize);
@@ -43,9 +43,5 @@ export default class {
 
     #randomPosition(axisLength, blockSize) {
         return Math.floor(Math.random() * (axisLength / blockSize)) * blockSize;
-    }
-
-    #isBlockPositionOccupied(blocks, position) {
-        return blocks.some(piece => piece.checkPositionMatches(position));
     }
 }

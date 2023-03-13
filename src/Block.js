@@ -25,6 +25,10 @@ export default class Block{
         return this.#position.isEqual(otherPosition);
     }
 
+    static isOccupied(blocks, position) {
+        return blocks.some(block => block.checkPositionMatches(position));
+    }
+
     get position() {
         return this.#position;
     }
