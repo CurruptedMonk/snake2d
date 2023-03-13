@@ -14,6 +14,7 @@ export default class {
             this.#game.actors.food.changePosition(this.#game.actors.snake.body);
             this.#game.actors.snake.growUp();
             this.#game.actors.score.increase();
+            this.#game.actors.speed.increase();
         }
         if(this.#game.actors.snake.isDeathCollision()) {
             this.#game.setState(this.#game.gameOverState);
