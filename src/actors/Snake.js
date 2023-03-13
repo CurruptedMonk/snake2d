@@ -51,13 +51,19 @@ export default class {
     isDeathCollision() {
         const head = this.#body[0];
         const headlessBody = this.#body.slice(1);
-        const selfCollision = headlessBody.some(block => block.checkPositionMatches(head.position));
-        const wallCollision = head.position.x < 0
+
+        return this.#isSelfCollision(head, headlessBody) || this.#isWallCollision(head);
+    }
+
+    #isSelfCollision(head, headlessBody) {
+        return headlessBody.some(block => block.checkPositionMatches(head.position));
+    }
+
+    #isWallCollision(head) {
+        return head.position.x < 0
             || head.position.y < 0
             || head.position.x > this.#layer.width
             || head.position.y > this.#layer.height;
-
-        return selfCollision || wallCollision;
     }
 
     get body() {
