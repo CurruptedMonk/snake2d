@@ -6,6 +6,7 @@ import RunningState from "./state/RunningState.js";
 import GameOverState from "./state/GameOverState.js";
 import PauseState from "./state/PauseState.js";
 import StartMenuState from "./state/StartMenuState.js";
+import Score from "./Score.js";
 
 export default class {
     #blockSize;
@@ -52,7 +53,8 @@ export default class {
     #initActors() {
         this.#actors = Object.freeze({
                 food: new Food(this.#gameLayer, this.#blockSize),
-                snake: new Snake(this.#gameLayer, this.#blockSize)
+                snake: new Snake(this.#gameLayer, this.#blockSize),
+                score: new Score(this.#gameLayer)
             }
         )
     }

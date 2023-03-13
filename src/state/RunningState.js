@@ -13,6 +13,7 @@ export default class {
         if (this.#game.actors.snake.isEat(this.#game.actors.food.position)) {
             this.#game.actors.food.changePosition(this.#game.actors.snake.body);
             this.#game.actors.snake.growUp();
+            this.#game.actors.score.increase();
         }
         if(this.#game.actors.snake.isDeathCollision()) {
             this.#game.setState(this.#game.gameOverState);
