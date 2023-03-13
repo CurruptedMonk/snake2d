@@ -6,8 +6,8 @@ import RunningState from "./state/RunningState.js";
 import GameOverState from "./state/GameOverState.js";
 import PauseState from "./state/PauseState.js";
 import StartMenuState from "./state/StartMenuState.js";
-import Score from "./Score.js";
-import Speed from "./Speed.js";
+import Score from "./actors/Score.js";
+import Speed from "./actors/Speed.js";
 
 export default class {
     #blockSize;
