@@ -19,7 +19,6 @@ export default class {
         )
         this.#direction = new Direction(blockSize);
         this.#body = [this.#createHead()];
-
     }
 
     update() {
@@ -31,9 +30,11 @@ export default class {
     }
 
     draw() {
-        for(const piece of this.#body) {
-            piece.draw(this.#layer.context, "black");
-        }
+        this.#body.forEach((piece, index) => {
+            index === 0
+                ? piece.draw(this.#layer.context, "black")
+                : piece.draw(this.#layer.context, "#2c2e30");
+        });
     }
 
     changeDirection(direction) {
